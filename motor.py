@@ -2,13 +2,22 @@ import RPi.GPIO as GPIO
 import time
 import sys
 
-if len(sys.argv) != 1:
+#check if there are only two arguments (name of file), (number)
+if len(sys.argv) != 2:
     print("Please give a Number between 1 and 100")
     exit()
 
-if sys.argv[0] < 1 and  sys.argv[0] > 100:
+#print(int(sys.argv[1]))
+
+#check if number is correct
+if (int(sys.argv[1]) < 0 or  int(sys.argv[1]) > 100):
     print("Your Number is not between 1 and 100")
     exit()
+
+else:
+    print("True")
+
+speed = int(sys.argv[1])
 
 
 
@@ -21,17 +30,20 @@ pwmMotor = GPIO.PWM(MOTOR_GPIO, 100)
 
 pwmMotor.start(0)
 try:
-
-    for speed in range(0,110,10):
+    #unendlich schleife --> bis 0 eingegeben wird
+    while 1: 
         pwmMotor.ChangeDutyCycle(speed)
         print (speed)
-        time.sleep(2)
+        time.sleep(4)
+
 except KeyboardInterrupt:
-    pass
+     pass
 
 pwmMotor.stop()
 
-#GPIO.output (MOTOR_GPIO, GPIO.HIGH)
+
+
+GPIO.output (MOTOR_GPIO, GPIO.HIGH)
 
 #time.sleep(3)
 
