@@ -5,6 +5,6 @@
   ## Username: pi
   ## Passwort: raspberry
   ## /home/pi/syp
-  ## python3./led.py
+  ## python3 ./led.py
   
 # Joy-Pi 4
