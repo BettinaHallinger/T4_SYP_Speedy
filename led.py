@@ -17,11 +17,11 @@ if (int(sys.argv[1]) < 0 or  int(sys.argv[1]) > 100):
 else:
     print("True")
 
-speed = int(sys.argv[1])
+brightness = int(sys.argv[1])
 
 
 
-MOTOR_GPIO = 21
+MOTOR_GPIO = 20
 GPIO.setmode (GPIO.BCM)
 
 GPIO.setup (MOTOR_GPIO, GPIO.OUT)
@@ -30,23 +30,22 @@ pwmMotor = GPIO.PWM(MOTOR_GPIO, 100)
 
 pwmMotor.start(0)
 try:
-    #unendlich schleife --> bis 0 eingegeben wird
-    #while 1:
-     pwmMotor.ChangeDutyCycle(speed)
-     print (speed)
-     time.sleep(4)
 
+    while 1:
+        pwmMotor.ChangeDutyCycle(brightness)
+        print (brightness)
+        time.sleep(2)
 except KeyboardInterrupt:
-     pass
-
-pwmMotor.stop()
+    pwmMotor.stop()
 
 
 
-GPIO.output (MOTOR_GPIO, GPIO.HIGH)
+
+#GPIO.output (MOTOR_GPIO, GPIO.HIGH)
 
 #time.sleep(3)
 
 #GPIO.output(MOTOR_GPIO, GPIO.LOW)
 
 GPIO.cleanup()
+
