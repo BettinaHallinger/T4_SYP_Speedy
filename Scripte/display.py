@@ -13,7 +13,7 @@
 import time
 import RPi.GPIO as GPIO
 import sys
-import commands
+#import commands
 
 if len(sys.argv) != 3:
     print("Error")
@@ -115,8 +115,8 @@ if __name__ == '__main__':
 
         init()
 
-        message(commands.getoutput('hostname -I'))
-        time.sleep(5)
+       # message(commands.getoutput('hostname -I'))
+       # time.sleep(5)
 
         count = 0
         sumLetters = 0
@@ -152,8 +152,8 @@ if __name__ == '__main__':
                     text.append([s1, s2])
                 else:
                   break
-          
-        
+
+
         while True:
           for i in text:
             message(i[0])
