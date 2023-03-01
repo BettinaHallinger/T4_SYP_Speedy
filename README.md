@@ -8,7 +8,7 @@
     python3 ./led.py
   
 ## Joy-Pi 4
-    IP: 10.3.141.3
+    IP: 10.3.141.1
     Username: pi
     Passwort: raspberry
     W-Lan Passwort: Drehteller2023Speedy
