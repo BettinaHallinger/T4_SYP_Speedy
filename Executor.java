@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Executor {
 
-    private ArrayList<Process> processList= new ArrayList<>();
+    private ArrayList<Run> processList= new ArrayList<>();
 
     public void writeToJsonMotor(int wert) throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader("data.json"));
@@ -77,32 +77,69 @@ public class Executor {
         //System.out.println(velocity + brightness + veloDisplay + display);
     }
 
-    public void setValuesPI() throws IOException, InterruptedException, ParseException {
+    public void setValuesPI() throws IOException, ParseException {
 
         if(processList.size() != 0){
-            for (Process p : processList) {
-                p.destroy();
+            for (Run p:processList) {
+                p.stopThread();
             }
         }
 
         ProcessBuilder builder1 = new ProcessBuilder();
-        //ProcessBuilder builder2 = new ProcessBuilder();
-        //ProcessBuilder builder3 = new ProcessBuilder();
+        ProcessBuilder builder2 = new ProcessBuilder();
+        ProcessBuilder builder3 = new ProcessBuilder();
 
+        //Get data from JSON File
         Object obj = new JSONParser().parse(new FileReader("data.json"));
         JSONObject jo = (JSONObject) obj;
 
-        String velocity = (String) jo.get("MotorVelocity");
-        String brightness = (String) jo.get("LEDBrightness");
-        String veloDisplay = (String) jo.get("DisplayVelocity");
+        int velocity = (int) jo.get("MotorVelocity");
+        int brightness = (int) jo.get("LEDBrightness");
+        int veloDisplay = (int) jo.get("DisplayVelocity");
         String display = (String) jo.get("DisplayText");
 
-        builder1.command("python3", "./display.py", velocity);
-        builder1.command("python3", "./display.py", brightness);
-        builder1.command("python3", "./display.py", veloDisplay, display);
+        //Set commands for Python Scripts
+        builder1.command("python3", "./motor.py", Integer.toString(velocity));
+        builder2.command("python3", "./led.py", Integer.toString(brightness));
+        builder3.command("python3", "./display.py", Integer.toString(veloDisplay), display);
+
+        Run run1 = new Run();
+        Run run2 = new Run();
+        Run run3 = new Run();
+
+        run1.run(builder1);
+        run2.run(builder2);
+        run3.run(builder3);
+
+        processList.add(run1);
+        processList.add(run2);
+        processList.add(run3);
+
+
+        System.out.println(processList.size());
+
+    }
+
+    public void stopEverything(){
+
+        //Stop every Thread
+        for (Run p:processList) {
+            p.stopThread();
+        }
+
+        /*
+        ProcessBuilder builder1 = new ProcessBuilder();
+        ProcessBuilder builder2 = new ProcessBuilder();
+        ProcessBuilder builder3 = new ProcessBuilder();
+
+        builder1.command("python3", "./motor.py", "0");
+        builder2.command("python3", "./led.py", "0");
+        builder3.command("python3", "./display.py", "0", "");
 
         Process process = builder1.start();
-        processList.add(process);
-        process.waitFor();
+        Process process1 = builder2.start();
+        Process process3 = builder3.start();
+         */
     }
+
 }

@@ -15,18 +15,23 @@ public class MotorgeschwindigkeitApplication {
 	public static void main(String[] args){
 
 		try{
-			callPythonVelocity(0);
-			//callPythonLeds(0);
-			//callPythonDisplay(2, text);
+
+			Executor exec = new Executor();
+			exec.writeToJsonMotor(0);
+			exec.writeToJsonLED(0);
+			exec.writeToJsonDisplay(2, "Hallo mein Name ist Max");
+			exec.setValuesPI();
+			//exec.stopEverything();
+
 			System.out.println("Success");
-		}catch (IOException Exception ){
+		}catch (Exception Exception ){
 			Exception.printStackTrace();
 		}
 
 		SpringApplication.run(MotorgeschwindigkeitApplication.class, args);
 	}
 
-	//Erstellung eines Prozesses --> Daten über Webseite zuerst in JSON File --> auslesen und dann den neuen Prozess starten
+	//Nicht mehr nötig
 	public static void callPythonVelocity(int velocity) throws IOException {
 		String line = "python3 ./" + "motor.py " + velocity;
 		CommandLine cmdLine = CommandLine.parse(line);
@@ -56,27 +61,34 @@ public class MotorgeschwindigkeitApplication {
 		int exitCode = executor.execute(cmdLine);
 	}
 
-	public static void callPythonDisplay(int velocity, String text) throws IOException {
+	public static void callPythonDisplay(int velocity, String text) throws IOException, InterruptedException {
 		ProcessBuilder builder = new ProcessBuilder();
 
 		String velo = Integer.toString(velocity);
 
+		//Process process = Runtime.getRuntime().exec("python3 ./display.py" + velo + text);
+
+
 		builder.command("python3", "./display.py", velo, text);
 
 		//builder.command("sh", "-c", "ls");
+
 		Process process = builder.start();
+		process.waitFor();
+
+
 
 		/*String line = "python3 ./" + "display.py " + velocity + " " + text;
 		System.out.println(line);
 		CommandLine cmdLine = CommandLine.parse(line);
-
-
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		PumpStreamHandler streamHandler = new PumpStreamHandler(outputStream);
 
 		DefaultExecutor executor = new DefaultExecutor();
 		executor.setStreamHandler(streamHandler);
 
-		int exitCode = executor.execute(cmdLine);*/
+		int exitCode = executor.execute(cmdLine);
+		*/
+
 	}
 }
