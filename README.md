@@ -18,3 +18,4 @@
     1. Mit Hotspot "Drehteller-Speedy" verbinden
     2. Hotspot Passwort: Drehteller2023Speedy
     3. Im Browser 10.3.141.1 eingeben um auf die RaspAP-GUI zuzugreifen
+    4. Benutzer: admin -- Passwort: secret
