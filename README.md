@@ -11,6 +11,9 @@
     IP: 10.3.141.1
     Username: pi
     Passwort: raspberry
-    W-Lan Passwort: Drehteller2023Speedy
     /home/speedy
     python3 ./led.py
+    ####RaspAP:
+    Mit Hotspot **Drehteller-Speedy** verbinden
+    Hotspot Passwort: Drehteller2023Speedy
+    Im Browser **10.3.141.1** eingeben um auf die RaspAP-GUI zuzugreifen
