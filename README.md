@@ -15,6 +15,6 @@
     python3 ./led.py
     
 #### RaspAP:
-    Mit Hotspot Drehteller-Speedy verbinden.
-    Hotspot Passwort: Drehteller2023Speedy
-    Im Browser 10.3.141.1 eingeben um auf die RaspAP-GUI zuzugreifen
+    1. Mit Hotspot "Drehteller-Speedy" verbinden
+    2. Hotspot Passwort: Drehteller2023Speedy
+    3. Im Browser 10.3.141.1 eingeben um auf die RaspAP-GUI zuzugreifen
