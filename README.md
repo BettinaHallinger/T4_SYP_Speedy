@@ -8,7 +8,7 @@
     python3 ./led.py
   
 ## Joy-Pi 4
-    IP: 10.10.23
+    IP: 10.10.0.23
     Username: pi
     Passwort: raspberry
     /home/speedy
