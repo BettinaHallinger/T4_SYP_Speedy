@@ -11,12 +11,13 @@
 	let routeChange = 'Home';
 </script>
 
-<div class="containerAll">
-	<ul1 />
-	<ul>
-		<img src="HTL-Logo.png"> 
-	</ul>
-
+<!--<div class="containerAll">-->
+	<div class="header">
+		<div class="blue"></div>
+		<div class="gray">
+			<img src="HTL-Logo.png"> 
+		</div>
+	</div>
 	<h1>Welcome to Speedy</h1>
 	<!-- TODO: Take the 'routeChange' variable from +page.svelte and use it in a switch-case (in 'Router.svelte') to not use a function for every single button -->
 
@@ -27,9 +28,7 @@
 					>Motorgeschwindigkeit</button>
 				<button on:click={onclickLED} on:click={() => (routeChange = 'LED')}>LED</button>
 				<button on:click={onclickDisText} on:click={() => (routeChange = 'DT')}>Displaytext</button>
-				<button on:click={onclickUmschG} on:click={() => (routeChange = 'UG')}
-					>Umschaltgeschwindigkeit</button
-				>
+				<button on:click={onclickUmschG} on:click={() => (routeChange = 'UG')}>Umschaltgeschwindigkeit</button>
 				<button on:click={onclickWlanM} on:click={() => (routeChange = 'WM')}>WLAN-Modus</button>
 				<button class="buttnSumbmit">Submit</button>
 			<!-- </ul2> -->
@@ -41,7 +40,7 @@
 			{/key}
 		</div>
 	</div>
-</div>
+<!--</div>-->
 
 <!--
 <MotorG/>
@@ -58,7 +57,8 @@
 		background-color: #2e2e2e;
 		padding: 0;
 		margin: 0;
-		overflow-x: hidden;
+		padding-top: 90px;
+		overflow-x: hidden; 
 
 	}
 
@@ -70,24 +70,29 @@
 	}
 
 	button {
-		border: 10px solid transparent;
+		padding: 0.6em;
+		border: none;
 		color: #fff;
-		background-color: #000000;
-		border-radius: 15px;
-		/*width: 20em;*/
-		/*display: inline-block;*/
+		background-color: #161616;
+		border-radius: 25px;
 		margin: 1%;
-		/*display: block;
-		flex-direction: column;*/
 		font-size: 18px;
 	}
 
 	button:hover {
+		transition: 0.2s ease-in-out;
 		background-color: #0e80c8;
 		color: white;
 	}
 
+	button:focus{
+      outline: none;
+      background-color: #0e80c8;
+    }
+
+
 	.buttnSumbmit {
+		transition: 0.2s ease-in-out;
 		background-color: #0e80c8;
 		margin-top: 5%;
 	}
@@ -96,7 +101,30 @@
 		background-color: #1f1f1f;
 	}
 
-	ul {
+	.buttnSumbmit:focus{
+      outline: none;
+      background-color: #1f1f1f;
+    }
+
+	.header{
+		width: 100%;
+		position: fixed;
+		top: 0;
+		z-index: 1;
+	}
+
+	.blue {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		border: 1px solid #0e80c8;
+		background-color: #0e80c8;
+		width: 100%;
+		padding: 1px 50%;
+		height: 4px
+	}
+
+	.gray {
 		display: flex;
 		align-items: center;
 		justify-content: start;
@@ -107,9 +135,7 @@
 		border: 1px solid #4e4e4e;
 		background-color: #4e4e4e;
 		width: 100%;
-		height: 90px;
-		position: sticky;
-		top: 0;
+		 
 	}
 
 	img{
@@ -117,28 +143,17 @@
 		width: 200px;
 		
 	}
-	li {
+	/*li {
 		display: block;
 		color: #fff;
 		padding: 17px 20px;
 	}
 
-	ul1 {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		border: 1px solid #0e80c8;
-		background-color: #0e80c8;
-		width: 100%;
-		padding: 1px 50%;
-	}
-
 	nav {
 		flex-basis: 10rem;
-		/* background-color: yellow; */
+		 background-color: yellow; 
 		padding: 1rem;
-	}
+	}*/
 
 	.containerBoth {
 		/* display: flex;
@@ -150,6 +165,7 @@
 		grid-gap: 0.5em;
 		
 		grid-auto-flow: column; */
+		z-iindex: 0;
 	}
 
 	.container {
@@ -169,15 +185,13 @@
 		padding: 2em;
 		/* height: screen; */
 		position: fixed;
-		float: left;
-		
-		
+		float: left;	
+		overflow: hidden;	
 	}
 
 	.container2 {
 		/*background-color: rgb(26, 200, 142);
 		grid-column: 3 / 9;
-		
 		grid-row: 1 / -1;
 		display: grid;*/
 		width: 65%;

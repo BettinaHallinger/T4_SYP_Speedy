@@ -1,8 +1,9 @@
 <div class="switchContainer">
-	<h1>WLAN-Hotspot</h1>
+	
   <div class="container">
 
     <div class="container1">
+      <h1>WLAN-Hotspot</h1>
       <label class="switch">
         <input id = "hotspot" type="checkbox" bind:checked={yes} />
         <span class="slider round" />
@@ -12,15 +13,15 @@
     <div class="container1">
       <h1>Bestehendes WLAN</h1>
       <p>SSID</p>
-      <input type="string" id="wlanSSID" disabled={!yes} bind:value={SSIDbestehend} />
+      <input class="eingabe" type="string" id="wlanSSID" disabled={!yes} bind:value={SSIDbestehend} />
       <p>Passwort</p>
-      <input type="string" id="wlanPasswort" disabled={!yes} bind:value={passwort} />
+      <input class="eingabe" type="string" id="wlanPasswort" disabled={!yes} bind:value={passwort} />
       <button id="connect" disabled={!yes} on:click={connectToWLAN}>Verbinden</button>
     </div>
 
     <div class="container1">
       <h1>Eigene SSID</h1>
-      <input class = "eingabe" type="string" id ="inputBtn" bind:value={ssid}>
+      <input class="eingabe" type="string" id ="inputBtn" placeholder="Drehteller1" bind:value={ssid}>
     </div>
   </div>
 </div>
@@ -37,8 +38,34 @@
 </script>
 
 <style>
+    #connect {
+      transition: 0.2s ease-in-out;
+      padding: 0.6em;
+      border: none;
+      color: #fff;
+      background-color: #0e80c8;
+      border-radius: 25px;
+      margin: 2em;
+      font-size: 18px;
+      width: 70%;
+    }
+
+    #connect:hover {
+      background-color: #1f1f1f;
+    }
+
+    #connect:disabled{
+      background-color: #6b6b6b;
+      color: #c1c1c1;
+    }
+
+    #connect:focus{
+      outline: none;
+      background-color: #39b3ff;
+    }
+
   .switchContainer{
-    padding: 4em 0 4em 0;
+    padding-top: 1em;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -47,12 +74,26 @@
 
   .container1{
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     flex-direction: column;
-    padding-top: 5em;
+    align-items: center;  
+    margin-top: 3em; 
   }
 
+  .eingabe{
+    padding: 0.7em;
+    width: 100%;
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 10px;
+    transition: 0.1s ease-in-out;
+  }
+
+  .eingabe:focus{
+    outline: 2px solid #0e80c8;
+  }
    .switch{
+    margin-top: 1em;
     position: relative;
     display:inline-flex;
     width: 60px;
