@@ -16,7 +16,7 @@
       <input class="eingabe" type="string" id="wlanSSID" disabled={!yes} bind:value={SSIDbestehend} />
       <p>Passwort</p>
       <input class="eingabe" type="string" id="wlanPasswort" disabled={!yes} bind:value={passwort} />
-      <button id="connect" disabled={!yes} on:click={connectToWLAN}>Verbinden</button>
+      <button class="btnSubmit" id="connect" disabled={!yes} on:click={connectToWLAN}>Verbinden</button>
     </div>
 
     <div class="container1">
@@ -39,14 +39,7 @@
 
 <style>
     #connect {
-      transition: 0.2s ease-in-out;
-      padding: 0.6em;
-      border: none;
-      color: #fff;
-      background-color: #0e80c8;
-      border-radius: 25px;
-      margin: 2em;
-      font-size: 18px;
+      
       width: 70%;
     }
 
@@ -80,18 +73,8 @@
     margin-top: 3em; 
   }
 
-  .eingabe{
-    padding: 0.7em;
-    width: 100%;
-    margin-bottom: 1em;
-    border: none;
-    border-radius: 10px;
-    transition: 0.1s ease-in-out;
-  }
+  
 
-  .eingabe:focus{
-    outline: 2px solid #0e80c8;
-  }
    .switch{
     margin-top: 1em;
     position: relative;
@@ -134,9 +117,9 @@ input:checked + .slider {
   background-color: rgb(22, 167, 22);
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px rgb(22, 167, 22);;
-}
+/* input:focus + .slider {
+  box-shadow: 0 0 1px rgb(22, 167, 22);
+} */
 
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);

@@ -18,19 +18,17 @@
 			<img src="HTL-Logo.png"> 
 		</div>
 	</div>
-	<h1>Welcome to Speedy</h1>
 	<!-- TODO: Take the 'routeChange' variable from +page.svelte and use it in a switch-case (in 'Router.svelte') to not use a function for every single button -->
 
 	<div class="containerBoth">
 		<div class="container">
 			<!--<ul2 class="conButton">-->
-				<button on:click={onclickMG} on:click={() => (routeChange = 'MG')}
-					>Motorgeschwindigkeit</button>
-				<button on:click={onclickLED} on:click={() => (routeChange = 'LED')}>LED</button>
-				<button on:click={onclickDisText} on:click={() => (routeChange = 'DT')}>Displaytext</button>
-				<button on:click={onclickUmschG} on:click={() => (routeChange = 'UG')}>Umschaltgeschwindigkeit</button>
-				<button on:click={onclickWlanM} on:click={() => (routeChange = 'WM')}>WLAN-Modus</button>
-				<button class="buttnSumbmit">Submit</button>
+				<button class="btn" on:click={onclickMG} on:click={() => (routeChange = 'MG')}>Motor</button>
+				<button class="btn" on:click={onclickLED} on:click={() => (routeChange = 'LED')}>LED</button>
+				<button class="btn"on:click={onclickDisText} on:click={() => (routeChange = 'DT')}>Display</button>
+				<!-- <button class="btn" on:click={onclickUmschG} on:click={() => (routeChange = 'UG')}>Umschaltgeschwindigkeit</button> -->
+				<button class="btn" on:click={onclickWlanM} on:click={() => (routeChange = 'WM')}>WLAN-Modus</button>
+				<button class="btnSubmit">Submit</button>
 			<!-- </ul2> -->
 		</div>
 		<!-- <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p> -->
@@ -59,7 +57,7 @@
 		margin: 0;
 		padding-top: 90px;
 		overflow-x: hidden; 
-
+		font-family: calibri light, arial;
 	}
 
 	h1 {
@@ -69,39 +67,44 @@
 		margin-bottom: 5%;
 	}
 
-	button {
+	:global(button){
 		padding: 0.6em;
 		border: none;
-		color: #fff;
-		background-color: #161616;
-		border-radius: 25px;
 		margin: 1%;
 		font-size: 18px;
+		cursor: pointer;
+		border-radius: 25px;
 	}
 
-	button:hover {
+	:global(.btn) {
+		color: #fff;
+		background-color: #161616;
+	}
+
+	:global(.btn:hover) {
 		transition: 0.2s ease-in-out;
 		background-color: #0e80c8;
 		color: white;
 	}
 
-	button:focus{
+	:global(.btn:focus){
       outline: none;
       background-color: #0e80c8;
     }
 
 
-	.buttnSumbmit {
+	:global(.btnSubmit) {
 		transition: 0.2s ease-in-out;
 		background-color: #0e80c8;
+		color: white;
 		margin-top: 5%;
 	}
 
-	.buttnSumbmit:hover {
+	:global(.btnSubmit:hover) {
 		background-color: #1f1f1f;
 	}
 
-	.buttnSumbmit:focus{
+	:global(.btnSubmit:focus){
       outline: none;
       background-color: #1f1f1f;
     }
@@ -143,17 +146,19 @@
 		width: 200px;
 		
 	}
-	/*li {
-		display: block;
-		color: #fff;
-		padding: 17px 20px;
+
+	:global(.eingabe){
+    padding: 0.7em;
+    width: 100%;
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 10px;
+    transition: 0.1s ease-in-out;
 	}
 
-	nav {
-		flex-basis: 10rem;
-		 background-color: yellow; 
-		padding: 1rem;
-	}*/
+	:global(.eingabe:focus)	{
+		outline: 2px solid #0e80c8;
+	}
 
 	.containerBoth {
 		/* display: flex;
@@ -165,7 +170,11 @@
 		grid-gap: 0.5em;
 		
 		grid-auto-flow: column; */
-		z-iindex: 0;
+		/* z-index: 0; */
+		overflow: hidden;
+		display: grid;
+		grid: 1fr / 30% 1fr;
+		width: 100%;
 	}
 
 	.container {
@@ -174,19 +183,23 @@
 		grid-row: 1 / -1;
 		display: grid;*/
 		/* display: flex; */
-		justify-content: center;
+		justify-content: start;
+		margin-top: 2em;
 		/* background-color: aqua;
 		height: max-content;
 		margin: 1em; */
-		width: 30%;
+
 		/* margin: 1em; */
 		display: flex;
 		flex-direction: column;
 		padding: 2em;
 		/* height: screen; */
-		position: fixed;
-		float: left;	
-		overflow: hidden;	
+		width: 100%;
+		
+		/* float: left;	 */
+		/* overflow: hidden;	 */
+
+		
 	}
 
 	.container2 {
@@ -194,13 +207,15 @@
 		grid-column: 3 / 9;
 		grid-row: 1 / -1;
 		display: grid;*/
-		width: 65%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		float: right;
+		justify-self: center;
+		height: 100%;
 		/* height:	max-content; */
-		background-color: grey;
+		/* background-color: grey; */
 		
 	}
 

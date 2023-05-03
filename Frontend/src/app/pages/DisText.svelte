@@ -1,4 +1,5 @@
 <script>
+    import UmschG from "./UmschG.svelte";
 	let name = '';
     let eingabeL;
 
@@ -14,10 +15,13 @@
 
 <div class = "textField">
     <h1>Displaytext</h1>
-    <p>Text darf nicht mehr als 160 Zeichen beinhalten.</p>
-    <p>Text: <span id="demo">{name}</span></p>
-    <input class = "eingabe" type="string" maxlength=160 id ="inputBtn" on:input={updateLength} bind:value={name}>
+    <p>Der Text darf nicht mehr als 160 Zeichen beinhalten.</p>
+    <!--<p>Text: <span id="demo">{name}</span></p>
+    <input class = "eingabe" type="string" maxlength=160 id ="inputBtn" on:input={updateLength} bind:value={name}>-->
+    <textarea class="eingabe" maxlength=160 rows=5 id="inputBtn" on:input={updateLength} bind:value={name}></textarea>
     <p>Zeichen: <span id ="demo">{name.length}</span></p>
+
+    <UmschG />
     
 
 </div>
@@ -39,8 +43,9 @@
         font-size: 15px;
         color: rgb(150, 150, 150);
     }
+
     .textField{
-      width: 80%;
+      width: 60%;
       padding-left: 10px;
       display: flex;
       justify-content: center;
@@ -48,15 +53,13 @@
       flex-direction: column;
     }
 
-    .eingabe{
+    /*.eingabe{
       background-color: #0E80C8;
       color: #fff;
       border-radius:15px;
       border: 2px solid #0E80C8;
       width: 50%;
-      /* height: 100px; */
-
-    }
+    }*/
 
 
 </style>

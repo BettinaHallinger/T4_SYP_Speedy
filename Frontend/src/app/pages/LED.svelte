@@ -52,13 +52,13 @@
       text-align: center;
     }
 
-    .eingabe{
+    /*.eingabe{
       background-color: #0E80C8;
       color: #fff;
       border-radius:15px;
       border: 2px solid #0E80C8;
       width: 10em;
-    }
+    }*/
       
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
@@ -72,13 +72,19 @@
       -moz-appearance: textfield;
     }
 
+    #numField{
+      margin-top: 3em;
+      width: 100px;
+    }
+
   </style>
 
 
 <div class = "slidecontainer">
-  <input bind:value={value} step="5"  type = "range" min = 0 max = 100 class ="slider" id="myTange">
-  <p>Value: <span id ="demo">{value}</span></p>
-  <input class = "eingabe" type="number" id ="inputBtn" bind:value={value} on:input={scream} min = 0 max = 100 >
+  <h1>LED-Helligkeit</h1>
+  <input bind:value={value} step="5"  type = "range" min = 0 max = 100 class="slider" id="myRange">
+  <!-- <p>Value: <span id ="demo">{value}</span></p> -->
+  <input class = "eingabe" type="number" id ="numField" bind:value={value} on:input={scream} min=0 max=100 >
 </div>  
 
 <script>
