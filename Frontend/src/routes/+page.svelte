@@ -187,6 +187,7 @@
 		float: right;
 		justify-self: center;
 		height: 100%;
+		padding-top: 3em;	
 	}
 
 	@media (max-width: 780px){
@@ -195,19 +196,18 @@
 			top: 0;
 		}
 
-		.containerBoth{
-			flex-wrap: wrap;
-			flex-direction: column;
-		}
 
 		.container{
 			width: 90%;
 			position: relative;
+			grid-column: 1 / -1;
 		}
 
 		.container2{
 			width: 100%;
 			padding-bottom: 4em;
+			grid-column: 1 / -1;
+			padding-top: 1em;
 		}
 	}
 

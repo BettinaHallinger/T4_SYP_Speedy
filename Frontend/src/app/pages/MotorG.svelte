@@ -3,12 +3,10 @@
   <style>
     .slidecontainer{
       width: 80%;
-      padding-left: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      padding: 4em 0 4em 0;
     }
 
     .slider {

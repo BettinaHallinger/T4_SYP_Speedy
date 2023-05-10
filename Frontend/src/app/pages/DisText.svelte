@@ -51,16 +51,6 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      margin-top: 3em; 
     }
-
-    /*.eingabe{
-      background-color: #0E80C8;
-      color: #fff;
-      border-radius:15px;
-      border: 2px solid #0E80C8;
-      width: 50%;
-    }*/
-
 
 </style>

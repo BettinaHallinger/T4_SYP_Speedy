@@ -13,15 +13,15 @@
     <div class="container1">
       <h1>Bestehendes WLAN</h1>
       <p>SSID</p>
-      <input class="eingabe" type="string" id="wlanSSID" disabled={!yes} bind:value={SSIDbestehend} />
+      <input class="eingabe" type="string" id="wlanSSID" disabled={!yes} on:input={scream} bind:value={SSIDbestehend} />
       <p>Passwort</p>
-      <input class="eingabe" type="string" id="wlanPasswort" disabled={!yes} bind:value={passwort} />
+      <input class="eingabe" type="string" id="wlanPasswort" disabled={!yes} on:input={scream} bind:value={passwort} />
       <button class="btnSubmit" id="connect" disabled={!yes} on:click={connectToWLAN}>Verbinden</button>
     </div>
 
     <div class="container1">
       <h1>Eigene SSID</h1>
-      <input class="eingabe" type="string" id ="inputBtn" placeholder="Drehteller1" bind:value={ssid}>
+      <input class="eingabe" type="string" id ="inputBtn" placeholder="Drehteller1" on:input={scream} bind:value={ssid}>
     </div>
   </div>
 </div>
@@ -31,9 +31,18 @@
   let yes = true;
   let SSIDbestehend = "";
   let passwort = "";
+  
 
-  function connectToWLAN(){
+  
+  function scream() {
+    console.log(ssid);
+    console.log(SSIDbestehend);
+    console.log(passwort);
+  }
 
+
+  function connectToWLAN() {
+    
   }
 </script>
 
@@ -58,7 +67,6 @@
     }
 
   .switchContainer{
-    padding-top: 1em;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -70,7 +78,7 @@
     justify-content: center; 
     flex-direction: column;
     align-items: center;  
-    margin-top: 3em; 
+    padding-bottom: 3em;
   }
 
   .container{

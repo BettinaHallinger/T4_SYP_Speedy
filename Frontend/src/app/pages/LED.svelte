@@ -7,7 +7,6 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      /* padding: 4em 0 4em 0; */
     }
 
     .slider {
@@ -98,12 +97,12 @@ import { validate_void_dynamic_element } from "svelte/internal";
  */
   function scream(event) {
     const v = event.target.value;
-    
+
     if ( v < 0 ) {
       value = 0
     } else if ( v > 100 ) {
       value = 100
-    } else if (v === "") {
+    } else if (v == "") {
       value = 0;
     } else {
       value = v;
