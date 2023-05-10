@@ -73,7 +73,9 @@
     margin-top: 3em; 
   }
 
-  
+  .container{
+    padding-bottom: 3em;
+  }
 
    .switch{
     margin-top: 1em;
