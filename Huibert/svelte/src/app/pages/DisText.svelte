@@ -9,6 +9,11 @@
 
     }
 
+    function setSessionStorage() {
+        sessionStorage.setItem("displayText", name);
+        console.log(window.sessionStorage.getItem("displayText"));
+    }
+
 
 </script>
 
@@ -16,7 +21,7 @@
     <h1>Displaytext</h1>
     <p>Text darf nicht mehr als 160 Zeichen beinhalten.</p>
     <p>Text: <span id="demo">{name}</span></p>
-    <input class = "eingabe" type="string" maxlength=160 id ="inputBtn" on:input={updateLength} bind:value={name}>
+    <input class = "eingabe" type="string" maxlength=160 on:input={setSessionStorage} id ="inputBtn" on:input={updateLength} bind:value={name}>
     <p>Zeichen: <span id ="demo2">{name.length}</span></p>
 
 

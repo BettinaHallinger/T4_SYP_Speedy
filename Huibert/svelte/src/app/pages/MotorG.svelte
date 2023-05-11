@@ -75,22 +75,32 @@
 </style>
 
 <div class = "slidecontainer">
-    <input bind:value={value} step="5"  type = "range" min = 0 max = 100 class ="slider" id="myTange">
+    <input bind:value={value} step="5" on:change={setSessionStorage}  type = "range" min = 0 max = 100 class ="slider" id="myTange">
     <p>Value: <span id ="demo">{value}</span></p>
     <input class = "eingabe" type="number" id ="inputBtn" bind:value={value} on:input={scream} min = 0 max = 100 >
 </div>
 
 <script>
     import { validate_void_dynamic_element } from "svelte/internal";
-
-
+    import { browser } from "$app/env";
 
     let value = 0;
+
+    if(sessionStorage.getItem("motor") != null) {
+        value = sessionStorage.getItem("motor");
+    }
 
     /**
      * @param event{any}
      */
+
+    function setSessionStorage() {
+        sessionStorage.setItem("motor", value);
+        console.log(window.sessionStorage.getItem("motor"));
+    }
+
     function scream(event) {
+
         const v = event.target.value;
 
         if ( v < 0 ) {
@@ -102,6 +112,8 @@
         } else {
             value = v;
         }
+
+        setSessionStorage();
     }
 
 

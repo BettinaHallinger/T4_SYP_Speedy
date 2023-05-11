@@ -9,6 +9,34 @@
 	import Router from '../app/routing/Router.svelte';
 
 	let routeChange = 'Home';
+
+	async function executeJava() {
+		const data = {
+			motor: sessionStorage.getItem("motor"),
+			displayText: sessionStorage.getItem("displayText"),
+			displayVel: sessionStorage.getItem("displayVel"),
+			led: sessionStorage.getItem("led")
+		};
+
+		await fetch('/execute-java', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(data)
+		});
+
+		//const result = await response.json();
+
+		//return result;
+	}
+
+	function SubmitValues() {
+		if(sessionStorage.getItem("motor") != null) {
+			let motor = sessionStorage.getItem("motor");
+
+
+		}
+
+	}
 </script>
 
 <div class="containerAll">
@@ -28,7 +56,7 @@
 			<button on:click={onclickDisText} on:click={() => (routeChange = 'DT')}>Displaytext</button>
 			<button on:click={onclickUmschG} on:click={() => (routeChange = 'UG')}>Umschaltgeschwindigkeit</button>
 			<button on:click={onclickWlanM} on:click={() => (routeChange = 'WM')}>WLAN-Modus</button>
-			<button class="buttnSumbmit">Submit</button>
+			<button class="buttnSumbmit" on:click={executeJava}>Submit</button>
 			<!-- </ul2> -->
 		</div>
 		<!-- <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p> -->

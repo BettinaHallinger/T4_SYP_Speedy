@@ -76,7 +76,7 @@
 
 
 <div class = "slidecontainer">
-    <input bind:value={value} step="5"  type = "range" min = 0 max = 100 class ="slider" id="myTange">
+    <input bind:value={value} step="5"  on:change={setSessionStorage} type = "range" min = 0 max = 100 class ="slider" id="myTange">
     <p>Value: <span id ="demo">{value}</span></p>
     <input class = "eingabe" type="number" id ="inputBtn" bind:value={value} on:input={scream} min = 0 max = 100 >
 </div>
@@ -103,6 +103,11 @@
         } else {
             value = v;
         }
+    }
+
+    function setSessionStorage() {
+        sessionStorage.setItem("led", value);
+        console.log(window.sessionStorage.getItem("led"));
     }
 
 
