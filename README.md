@@ -8,7 +8,7 @@
     python3 ./led.py
   
 ## Joy-Pi 4
-    IP: 10.10.0.23
+    IP: 10.10.0.23 in htljoh-public
     Username: pi
     Passwort: raspberry
     /home/speedy
@@ -17,4 +17,5 @@
 #### Hotspot:
     1. Mit Hotspot "Speedy" verbinden
     2. Hotspot Passwort: Drehteller2023Speedy
+    3. IP: 192.168.0.1 in Speedy-Wlan
 
