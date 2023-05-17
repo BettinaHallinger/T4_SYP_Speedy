@@ -4,18 +4,20 @@
 		onclickLED,
 		onclickDisText,
 		onclickUmschG,
-		onclickWlanM
+		onclickWlanM,
+		onclickLOG,
 	} from '../app/routing/Router.svelte';
 	import Router from '../app/routing/Router.svelte';
 
 	let routeChange = 'Home';
 </script>
 
-<!--<div class="containerAll">-->
+	
 	<div class="header">
 		<div class="blue"></div>
 		<div class="gray">
 			<img src="HTL-Logo.png"> 
+			<button class="btn" on:click={onclickLOG} on:click={() => (routeChange = "LOG")}>Login</button>	
 		</div>
 	</div>
 	<!-- TODO: Take the 'routeChange' variable from +page.svelte and use it in a switch-case (in 'Router.svelte') to not use a function for every single button -->
@@ -26,7 +28,6 @@
 				<button class="btn" on:click={onclickMG} on:click={() => (routeChange = 'MG')}>Motor</button>
 				<button class="btn" on:click={onclickLED} on:click={() => (routeChange = 'LED')}>LED</button>
 				<button class="btn"on:click={onclickDisText} on:click={() => (routeChange = 'DT')}>Display</button>
-				<!-- <button class="btn" on:click={onclickUmschG} on:click={() => (routeChange = 'UG')}>Umschaltgeschwindigkeit</button> -->
 				<button class="btn" on:click={onclickWlanM} on:click={() => (routeChange = 'WM')}>WLAN-Modus</button>
 				<button class="btnSubmit">Submit</button>
 			<!-- </ul2> -->
@@ -68,7 +69,7 @@
 	}
 
 	:global(button){
-		padding: 0.6em;
+		padding: 0.6em 3em 0.6em 3em;
 		border: none;
 		margin: 1%;
 		font-size: 18px;
@@ -130,7 +131,7 @@
 	.gray {
 		display: flex;
 		align-items: center;
-		justify-content: start;
+		justify-content: space-between;
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
@@ -165,6 +166,7 @@
 		display: grid;
 		grid: 1fr / 30% 1fr;
 		width: 100%;
+		margin-top: 5em;
 	}
 
 	.container {
