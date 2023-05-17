@@ -20,7 +20,7 @@ else:
 brightness = int(sys.argv[1])
 
 
-
+GPIO.cleanup()
 MOTOR_GPIO = 20
 GPIO.setmode (GPIO.BCM)
 

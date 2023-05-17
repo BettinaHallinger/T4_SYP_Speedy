@@ -20,7 +20,7 @@ else:
 speed = int(sys.argv[1])
 
 
-
+GPIO.cleanup()
 MOTOR_GPIO = 21
 GPIO.setmode (GPIO.BCM)
 

@@ -41,7 +41,7 @@ E_PULSE = 0.0005
 E_DELAY = 0.0005
 
 MAXLINES = 10
-
+GPIO.cleanup()
 def lcd_send_byte(bits, mode):
         GPIO.output(LCD_RS, mode)
         GPIO.output(LCD_DATA4, GPIO.LOW)
@@ -114,8 +114,8 @@ if __name__ == '__main__':
 
         init()
 
-       # message(commands.getoutput('hostname -I'))
-       # time.sleep(5)
+        #message(commands.getoutput('hostname -I'))
+        #time.sleep(5)
 
         count = 0
         sumLetters = 0

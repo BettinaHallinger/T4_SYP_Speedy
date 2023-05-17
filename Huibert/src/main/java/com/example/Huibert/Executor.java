@@ -5,11 +5,13 @@ import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Executor {
 
-    private ArrayList<Run> processList= new ArrayList<>();
+    private boolean run = false;
+    private ArrayList<Process> processes = new ArrayList<Process>();
 
     public void writeToJsonMotor(int wert) throws IOException, ParseException {
         Object obj = new JSONParser().parse(new FileReader("data.json"));
@@ -79,16 +81,19 @@ public class Executor {
 
     public void setValuesPI() throws IOException, ParseException {
 
-
-        if(processList.size() != 0){
-
-
-            processList = null;
+        if (run) {
+            ProcessBuilder builder0 = new ProcessBuilder("sh", "-c", "/usr/bin/killall /usr/bin/python3");
+            //builder0.command("/usr/bin/killall /usr/bin/python3");
+            Process process0 = builder0.start();
+            process0.destroy();
         }
 
-        ProcessBuilder builder = new ProcessBuilder();
-        ProcessBuilder builder0 = new ProcessBuilder();
-        ProcessBuilder builder4 = new ProcessBuilder();
+        if(processes.size() > 0){
+            for (Process p: processes) {
+                p.destroy();
+            }
+        }
+
 
 
 
@@ -96,17 +101,7 @@ public class Executor {
         ProcessBuilder builder2 = new ProcessBuilder();
         ProcessBuilder builder3 = new ProcessBuilder();
 
-        builder.command("python3", "pkill -9 -f ./motor.py");
-        builder0.command("python3", "pkill -9 -f ./led.py");
-        builder4.command("python3", "pkill -9 -f ./display.py");
 
-        Run run4 = new Run();
-        Run run5 = new Run();
-        Run run6 = new Run();
-
-        run4.run(builder);
-        run5.run(builder0);
-        run6.run(builder4);
 
         //Get data from JSON File
         Object obj = new JSONParser().parse(new FileReader("data.json"));
@@ -122,43 +117,22 @@ public class Executor {
         builder2.command("python3", "./led.py", Integer.toString(brightness));
         builder3.command("python3", "./display.py", Integer.toString(veloDisplay), display);
 
-        Run run1 = new Run();
-        Run run2 = new Run();
-        Run run3 = new Run();
-
-        run1.run(builder1);
-        run2.run(builder2);
-        run3.run(builder3);
-
-        processList.add(run1);
-        processList.add(run2);
-        processList.add(run3);
 
 
-        System.out.println(processList.size());
-
-    }
-
-    public void stopEverything(){
-
-        //Stop every Thread
-        for (Run p:processList) {
-            p.stopThread();
-        }
-
-        /*
-        ProcessBuilder builder1 = new ProcessBuilder();
-        ProcessBuilder builder2 = new ProcessBuilder();
-        ProcessBuilder builder3 = new ProcessBuilder();
-
-        builder1.command("python3", "./motor.py", "0");
-        builder2.command("python3", "./led.py", "0");
-        builder3.command("python3", "./display.py", "0", "");
-
-        Process process = builder1.start();
-        Process process1 = builder2.start();
+        Process process2 = builder2.start();
+        Process process1 = builder1.start();
         Process process3 = builder3.start();
-         */
+
+        processes.add(process1);
+        processes.add(process2);
+        processes.add(process3);
+
+        run = true;
+
+
+
     }
+
+
 
 }

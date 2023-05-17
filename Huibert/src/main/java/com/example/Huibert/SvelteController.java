@@ -8,6 +8,7 @@ import java.util.Map;
 
 @RestController
 public class SvelteController {
+    private Executor exec = new Executor();
     @PostMapping("/execute-java")
     public void executeJava(@RequestBody Map<String, String> data) {
         try {
@@ -29,7 +30,7 @@ public class SvelteController {
             //jsonResponse.addProperty("result", result);
             //return new Gson().toJson(jsonResponse);
             // GET VALUES FROM SESSION STORAGE
-            Executor exec = new Executor();
+            //Executor exec = new Executor();
             exec.writeToJsonMotor(motor);
             exec.writeToJsonLED(led);
             exec.writeToJsonDisplay(displayVel, displayText);
