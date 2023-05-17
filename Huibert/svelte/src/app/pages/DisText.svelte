@@ -2,6 +2,10 @@
     let name = '';
     let eingabeL;
 
+    if(sessionStorage.getItem("displayText") != null) {
+        name = sessionStorage.getItem("displayText");
+    }
+
     updateLength();
     function updateLength() {
         eingabeL = document.getElementById("eingabeL")?.innerHTML.length;

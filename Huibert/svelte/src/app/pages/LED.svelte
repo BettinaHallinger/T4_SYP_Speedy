@@ -88,6 +88,10 @@
 
     let value = 0;
 
+    if(sessionStorage.getItem("led") != null) {
+        value = sessionStorage.getItem("led");
+    }
+
     /**
      * @param event{any}
      */

@@ -88,6 +88,10 @@
 
     let value = 0;
 
+    if(sessionStorage.getItem("displayVel") != null) {
+        value = sessionStorage.getItem("displayVel");
+    }
+
     /**
      * @param event{any}
      */
