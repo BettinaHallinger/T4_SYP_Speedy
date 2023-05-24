@@ -4,22 +4,26 @@
 
         <div class="container1">
             <h1>WLAN-Hotspot</h1>
-            <label class="switch">
-                <input id = "hotspot" type="checkbox" bind:checked={yes} />
-                <span class="slider round" />
-            </label>
+<!--            <label class="switch">-->
+<!--                <input id = "hotspot" type="checkbox" bind:checked={yes} />-->
+<!--                <span class="slider round" />-->
+<!--            </label>-->
         </div>
 
-        <div class="container1">
-            <h1>Bestehendes WLAN</h1>
-            <p>SSID</p>
-            <input class="eingabe" type="string" id="wlanSSID" disabled={!yes} on:input={scream} bind:value={SSIDbestehend}>
-            <p>Passwort</p>
-            <input class="eingabe" type="string" id="wlanPasswort" disabled={!yes} on:input={scream} bind:value={passwort}>
-            <button class="btnSubmit" id="connect" disabled={!yes} on:click={connectToWLAN}>Verbinden</button>
+        <div class="container1" id="hotspotCon">
+            <h1>Hotspot</h1>
+<!--        <button class="btnSubmit" disabled={!yes} on:click={connectToWLAN()}>Verbinden</button>-->
+            <button class="btnSubmit" on:click={connectToWLAN()}>Verbinden</button>
+            <p>SSID ändern</p>
+<!--        <input class="eingabe" type="string" id="wlanSSID" disabled={!yes} on:input={scream} bind:value={SSIDbestehend}>-->
+            <input class="eingabe" type="string" id="wlanSSID" on:input={scream} bind:value={SSIDbestehend}>
+            <p>Passwort ändern</p>
+<!--        <input class="eingabe" type="string" id="wlanPasswort" disabled={!yes} on:input={scream} bind:value={passwort}>-->
+            <input class="eingabe" type="string" id="wlanPasswort" on:input={scream} bind:value={passwort}>
+            <button class="btnSubmit" on:click={connectToWLAN}>Ändern</button>
         </div>
 
-        <div class="container1">
+        <div class="container1" id="wlanCon">
             <h1>Eigene SSID</h1>
             <input class="eingabe" type="string" id ="inputBtn" placeholder="Drehteller1" on:input={scream} bind:value={ssid}>
         </div>
