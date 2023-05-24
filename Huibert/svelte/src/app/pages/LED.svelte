@@ -3,12 +3,10 @@
 <style>
     .slidecontainer{
         width: 80%;
-        padding-left: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        padding: 4em 0 4em 0;
     }
 
     .slider {
@@ -72,13 +70,18 @@
         -moz-appearance: textfield;
     }
 
+    #numField{
+        margin-top: 3em;
+        width: 100px;
+    }
 </style>
 
 
 <div class = "slidecontainer">
-    <input bind:value={value} step="5"  on:change={setSessionStorage} type = "range" min = 0 max = 100 class ="slider" id="myTange">
-    <p>Value: <span id ="demo">{value}</span></p>
-    <input class = "eingabe" type="number" id ="inputBtn" bind:value={value} on:input={scream} min = 0 max = 100 >
+    <h1>LED-Helligkeit</h1>
+    <input bind:value={value} step="5"  on:change={setSessionStorage} type = "range" min = 0 max = 100 class ="slider" id="myRange">
+<!--    <p>Value: <span id ="demo">{value}</span></p>-->
+    <input class = "eingabe" type="number" id ="numField" bind:value={value} on:input={scream} min = 0 max = 100 >
 </div>
 
 <script>

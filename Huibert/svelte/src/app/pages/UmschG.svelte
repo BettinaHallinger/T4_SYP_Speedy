@@ -52,12 +52,9 @@
         text-align: center;
     }
 
-    .eingabe{
-        background-color: #0E80C8;
-        color: #fff;
-        border-radius:15px;
-        border: 2px solid #0E80C8;
-        width: 10em;
+    #numField{
+        margin-top: 3em;
+        width: 100px;
     }
 
     /* Chrome, Safari, Edge, Opera */
@@ -76,9 +73,10 @@
 
 
 <div class = "slidecontainer">
-    <input bind:value={value} step="5" on:change={setSessionStorage} type = "range" min = 0 max = 100 class ="slider" id="myTange">
-    <p>Value: <span id ="demo">{value}</span></p>
-    <input class = "eingabe" type="number" id ="inputBtn" bind:value={value} on:input={scream} min = 0 max = 100 >
+    <h1>Umschaltgeschwindigkeit</h1>
+    <input bind:value={value} step="1" on:change={setSessionStorage} type = "range" min = 2 max = 10 class ="slider" id="myRange">
+<!--    <p>Value: <span id ="demo">{value}</span></p>-->
+    <input class = "eingabe" type="number" id ="numField" bind:value={value} on:input={scream} min = 0 max = 100 >
 </div>
 
 <script>
