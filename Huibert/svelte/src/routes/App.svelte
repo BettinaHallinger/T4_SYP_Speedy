@@ -122,7 +122,6 @@
 		background-color: #0e80c8;
 	}
 
-
 	:global(.btnSubmit) {
 		transition: 0.2s ease-in-out;
 		background-color: #0e80c8;

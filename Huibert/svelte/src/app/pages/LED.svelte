@@ -50,14 +50,6 @@
         text-align: center;
     }
 
-    .eingabe{
-        background-color: #0E80C8;
-        color: #fff;
-        border-radius:15px;
-        border: 2px solid #0E80C8;
-        width: 10em;
-    }
-
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
