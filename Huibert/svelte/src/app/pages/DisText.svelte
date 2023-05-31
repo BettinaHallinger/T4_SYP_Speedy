@@ -1,12 +1,22 @@
 <script>
+    import UmschG from "./UmschG.svelte";
     let name = '';
     let eingabeL;
+
+    if(sessionStorage.getItem("displayText") != null) {
+        name = sessionStorage.getItem("displayText");
+    }
 
     updateLength();
     function updateLength() {
         eingabeL = document.getElementById("eingabeL")?.innerHTML.length;
         console.log(eingabeL);
+        setSessionStorage();
+    }
 
+    function setSessionStorage() {
+        sessionStorage.setItem("displayText", name);
+        console.log(window.sessionStorage.getItem("displayText"));
     }
 
 
@@ -15,10 +25,12 @@
 <div class = "textField">
     <h1>Displaytext</h1>
     <p>Text darf nicht mehr als 160 Zeichen beinhalten.</p>
-    <p>Text: <span id="demo">{name}</span></p>
-    <input class = "eingabe" type="string" maxlength=160 id ="inputBtn" on:input={updateLength} bind:value={name}>
+<!--    <p>Text: <span id="demo">{name}</span></p>-->
+<!--    <input class = "eingabe" type="string" maxlength=160 on:input={setSessionStorage} id ="inputBtn" on:input={updateLength} bind:value={name}>-->
+    <textarea class="eingabe" maxlength=160 rows=5 id="inputBtn" on:input={updateLength} bind:value={name}></textarea>
     <p>Zeichen: <span id ="demo2">{name.length}</span></p>
 
+    <UmschG />
 
 </div>
 
@@ -40,22 +52,12 @@
         color: rgb(150, 150, 150);
     }
     .textField{
-        width: 80%;
+        width: 60%;
         padding-left: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-    }
-
-    .eingabe{
-        background-color: #0E80C8;
-        color: #fff;
-        border-radius:15px;
-        border: 2px solid #0E80C8;
-        width: 50%;
-        /* height: 100px; */
-
     }
 
 

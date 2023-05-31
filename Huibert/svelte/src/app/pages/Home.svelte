@@ -1,9 +1,20 @@
 <style>
     h1{
         color: white;
+        font-weight: 10;
+    }
+
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img{
+        width: 70%;
     }
 </style>
 
 <div>
-    <h1>HOME</h1>
+    <img src="logo_grey.svg">
 </div>

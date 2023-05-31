@@ -4,31 +4,61 @@
 		onclickLED,
 		onclickDisText,
 		onclickUmschG,
-		onclickWlanM
+		onclickWlanM,
+		onclickLOG
 	} from '../app/routing/Router.svelte';
 	import Router from '../app/routing/Router.svelte';
 
 	let routeChange = 'Home';
+
+	async function executeJava() {
+		const data = {
+			motor: sessionStorage.getItem("motor"),
+			displayText: sessionStorage.getItem("displayText"),
+			displayVel: sessionStorage.getItem("displayVel"),
+			led: sessionStorage.getItem("led")
+		};
+
+		await fetch('/execute-java', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(data)
+		});
+
+		//const result = await response.json();
+
+		//return result;
+	}
+
+	function SubmitValues() {
+		if(sessionStorage.getItem("motor") != null) {
+			let motor = sessionStorage.getItem("motor");
+
+
+		}
+
+	}
 </script>
 
 <div class="containerAll">
-	<ul1 />
-	<ul>
-		<li><a>HTL-Saalfelden</a></li>
-	</ul>
-
-	<h1>Welcome to Speedy</h1>
+	<div class="header">
+		<div class="blue"></div>
+		<div class="gray">
+			<img src="HTL-Logo.png">
+			<button class="btn" on:click={onclickLOG} on:click={() => (routeChange = "LOG")}>Login</button>
+		</div>
+	</div>
 	<!-- TODO: Take the 'routeChange' variable from +page.svelte and use it in a switch-case (in 'Router.svelte') to not use a function for every single button -->
 
 	<div class="containerBoth">
 		<div class="container">
 			<!--<ul2 class="conButton">-->
-			<button on:click={onclickMG} on:click={() => (routeChange = 'MG')}>Motorgeschwindigkeit</button>
-			<button on:click={onclickLED} on:click={() => (routeChange = 'LED')}>LED</button>
-			<button on:click={onclickDisText} on:click={() => (routeChange = 'DT')}>Displaytext</button>
-			<button on:click={onclickUmschG} on:click={() => (routeChange = 'UG')}>Umschaltgeschwindigkeit</button>
-			<button on:click={onclickWlanM} on:click={() => (routeChange = 'WM')}>WLAN-Modus</button>
-			<button class="buttnSumbmit">Submit</button>
+			<button class="btn" on:click={onclickMG} on:click={() => (routeChange = 'MG')}>Motorgeschwindigkeit</button>
+			<button class="btn" on:click={onclickLED} on:click={() => (routeChange = 'LED')}>LED</button>
+			<button class="btn" on:click={onclickDisText} on:click={() => (routeChange = 'DT')}>Displaytext</button>
+			<button class="btn" on:click={onclickUmschG} on:click={() => (routeChange = 'UG')}>Umschaltgeschwindigkeit</button>
+			<button class="btn" on:click={onclickWlanM} on:click={() => (routeChange = 'WM')}>WLAN-Modus</button>
+			<button class="btnSubmit" on:click={executeJava}>Submit</button>
 			<!-- </ul2> -->
 		</div>
 		<!-- <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p> -->
@@ -55,7 +85,9 @@
 		background-color: #2e2e2e;
 		padding: 0;
 		margin: 0;
+		padding-top: 90px;
 		overflow-x: hidden;
+		font-family: calibri light, arial;
 	}
 
 	h1 {
@@ -65,34 +97,69 @@
 		margin-bottom: 5%;
 	}
 
-	button {
-		border: 10px solid transparent;
-		color: #fff;
-		background-color: #000000;
-		border-radius: 15px;
-		/*width: 20em;*/
-		/*display: inline-block;*/
+	:global(button){
+		padding: 0.6em 3em 0.6em 3em;
+		border: none;
 		margin: 1%;
-		/*display: block;
-		flex-direction: column;*/
 		font-size: 18px;
+		cursor: pointer;
+		border-radius: 25px;
 	}
 
-	button:hover {
+	:global(.btn) {
+		color: #fff;
+		background-color: #161616;
+	}
+
+	:global(.btn:hover) {
+		transition: 0.2s ease-in-out;
 		background-color: #0e80c8;
 		color: white;
 	}
 
-	.buttnSumbmit {
+	:global(.btn:focus){
+		outline: none;
 		background-color: #0e80c8;
+	}
+
+	:global(.btnSubmit) {
+		transition: 0.2s ease-in-out;
+		background-color: #0e80c8;
+		color: white;
 		margin-top: 5%;
 	}
 
-	.buttnSumbmit:hover {
+	:global(.btnSubmit:hover) {
 		background-color: #1f1f1f;
 	}
 
-	ul {
+	:global(.btnSubmit:focus){
+		outline: none;
+		background-color: #1f1f1f;
+	}
+
+	.header{
+		width: 100%;
+		position: fixed;
+		top: 0;
+		z-index: 1;
+	}
+
+	.blue {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		border: 1px solid #0e80c8;
+		background-color: #0e80c8;
+		width: 100%;
+		padding: 1px 50%;
+		height: 4px
+	}
+
+	.gray {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
@@ -100,88 +167,77 @@
 		border: 1px solid #4e4e4e;
 		background-color: #4e4e4e;
 		width: 100%;
+
 	}
 
-	li {
-		display: block;
-		color: #fff;
-		padding: 17px 20px;
+	img{
+		margin-left: 20px;
+		width: 200px;
+
 	}
 
-	ul1 {
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		border: 1px solid #0e80c8;
-		background-color: #0e80c8;
+	:global(.eingabe){
+		padding: 0.7em;
 		width: 100%;
-		padding: 1px 50%;
+		margin-bottom: 1em;
+		border: none;
+		border-radius: 10px;
+		transition: 0.1s ease-in-out;
 	}
 
-	nav {
-		flex-basis: 10rem;
-		background-color: yellow;
-		padding: 1rem;
+	:global(.eingabe:focus)	{
+		outline: 2px solid #0e80c8;
 	}
 
 	.containerBoth {
-		display: flex;
-		justify-content: center;
-		height: fit-content;
-		/* grid-template-columns: repeat(8, 1fr);
-		grid-auto-rows: 1fr;
-		grid-gap: 0.5em;
-
-		grid-auto-flow: column; */
+		overflow: hidden;
+		display: grid;
+		grid: 1fr / 30% 1fr;
+		width: 100%;
+		margin-top: 5em;
 	}
 
 	.container {
-		/*
-		grid-column: 1 / 3;
-		grid-row: 1 / -1;
-		display: grid;*/
+
+		justify-content: start;
+		margin-top: 2em;
 		display: flex;
-		justify-content: center;
-		/* background-color: aqua;
-		height: max-content;
-		margin: 1em; */
-		width: 30%;
-		/* margin: 1em; */
-		display: flex;
-		justify-content: center;
 		flex-direction: column;
 		padding: 2em;
-
+		width: 100%;
+		position: sticky;
+		top: 0;
 	}
 
 	.container2 {
-		/*background-color: rgb(26, 200, 142);
-		grid-column: 3 / 9;
-
-		grid-row: 1 / -1;
-		display: grid;*/
-		width: 70%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		/* height:	max-content; */
-
+		float: right;
+		justify-self: center;
+		height: 100%;
+		padding-top: 3em;
 	}
 
 	@media (max-width: 780px){
-		.containerBoth{
-			flex-wrap: wrap;
-			flex-direction: column;
+		ul{
+			position: sticky;
+			top: 0;
 		}
+
 
 		.container{
 			width: 90%;
+			position: relative;
+			grid-column: 1 / -1;
 		}
 
 		.container2{
 			width: 100%;
 			padding-bottom: 4em;
+			grid-column: 1 / -1;
+			padding-top: 1em;
 		}
 	}
 

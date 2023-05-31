@@ -5,6 +5,7 @@
     import DisText from '../pages/DisText.svelte';
     import UmschG from '../pages/UmschG.svelte';
     import WlanM from '../pages/WlanM.svelte';
+    import Login from '../pages/Login.svelte';
 
     export let value = Home;
     //Nach dem klicken auf den Button Motorgeschwindigkeit, öffnet sich die Seite der Motorgeschwindigkeit
@@ -40,6 +41,11 @@
     }
 
     export function showRoute(){
+        console.log(value.name);
+    }
+
+    export function onclickLOG() {
+        value = Login;
         console.log(value.name);
     }
 </script>

@@ -1,25 +1,32 @@
 <div class="switchContainer">
-    <h1>WLAN-Hotspot</h1>
+
     <div class="container">
 
-        <div class="wlanMode">
-            <label class="switch">
-                <input id = "hotspot" type="checkbox" bind:checked={yes} />
-                <span class="slider round" />
-            </label>
+        <div class="container1">
+            <h1>WLAN-Hotspot</h1>
+<!--            <label class="switch">-->
+<!--                <input id = "hotspot" type="checkbox" bind:checked={yes} />-->
+<!--                <span class="slider round" />-->
+<!--            </label>-->
         </div>
 
-        <div class="wlanBestehend">
-            <h1>Bestehendes WLAN</h1>
-            <p>SSID</p>
-            <input type="string" id="wlanSSID" disabled={!yes} bind:value={SSIDbestehend}>
-            <p>Passwort</p>
-            <input type="string" id="wlanPasswort" disabled={!yes} bind:value={passwort}>
-            <button id="connect" disabled={!yes} on:click={connectToWLAN}>Verbinden</button>
+        <div class="container1" id="hotspotCon">
+            <h1>Hotspot</h1>
+<!--        <button class="btnSubmit" disabled={!yes} on:click={connectToWLAN()}>Verbinden</button>-->
+            <button class="btnSubmit" on:click={connectToWLAN()}>Verbinden</button>
+            <p>SSID ändern</p>
+<!--        <input class="eingabe" type="string" id="wlanSSID" disabled={!yes} on:input={scream} bind:value={SSIDbestehend}>-->
+            <input class="eingabe" type="string" id="wlanSSID" on:input={scream} bind:value={SSIDbestehend}>
+            <p>Passwort ändern</p>
+<!--        <input class="eingabe" type="string" id="wlanPasswort" disabled={!yes} on:input={scream} bind:value={passwort}>-->
+            <input class="eingabe" type="string" id="wlanPasswort" on:input={scream} bind:value={passwort}>
+            <button class="btnSubmit" on:click={connectToWLAN}>Ändern</button>
         </div>
 
-        <h1>Eigene SSID</h1>
-        <input class = "eingabe" type="string" id ="inputBtn" bind:value={ssid}>
+        <div class="container1" id="wlanCon">
+            <h1>Eigene SSID</h1>
+            <input class="eingabe" type="string" id ="inputBtn" placeholder="Drehteller1" on:input={scream} bind:value={ssid}>
+        </div>
     </div>
 </div>
 
@@ -29,21 +36,58 @@
     let SSIDbestehend = "";
     let passwort = "";
 
+    function scream() {
+        console.log(ssid);
+        console.log(SSIDbestehend);
+        console.log(passwort);
+    }
+
     function connectToWLAN(){
 
     }
 </script>
 
 <style>
+    #connect {
+
+        width: 70%;
+    }
+
+    #connect:hover {
+        background-color: #1f1f1f;
+    }
+
+    #connect:disabled{
+        background-color: #6b6b6b;
+        color: #c1c1c1;
+    }
+
+    #connect:focus{
+        outline: none;
+        background-color: #39b3ff;
+    }
+
     .switchContainer{
-        padding: 4em 0 4em 0;
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
     }
 
+    .container1{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 3em;
+    }
+
+    .container{
+        padding-bottom: 3em;
+    }
+
     .switch{
+        margin-top: 1em;
         position: relative;
         display:inline-flex;
         width: 60px;
@@ -84,9 +128,9 @@
         background-color: rgb(22, 167, 22);
     }
 
-    input:focus + .slider {
-        box-shadow: 0 0 1px rgb(22, 167, 22);;
-    }
+    /* input:focus + .slider {
+      box-shadow: 0 0 1px rgb(22, 167, 22);
+    } */
 
     input:checked + .slider:before {
         -webkit-transform: translateX(26px);
