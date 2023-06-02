@@ -7,7 +7,7 @@
   }
 
   function getText() {
-    console.log(text);
+
     setSessionStorage();
   }
 

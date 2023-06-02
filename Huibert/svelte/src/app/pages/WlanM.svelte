@@ -6,19 +6,91 @@
   let newWLAN = "";
   let passwortBestehend = "";
 
+  if(sessionStorage.getItem("wlanSSID") != null) {
+    newWLAN = sessionStorage.getItem("wlanSSID");
+  }
+  if(sessionStorage.getItem("wlanPass") != null) {
+    newWLAN = sessionStorage.getItem("wlanPass");
+  }
+  if(sessionStorage.getItem("hotspotSSID") != null) {
+    newWLAN = sessionStorage.getItem("hotspotSSID");
+  }
+  if(sessionStorage.getItem("hotspotPass") != null) {
+    newWLAN = sessionStorage.getItem("hotspotPass");
+  }
+
+
   function scream() {
     console.log(ssid);
     console.log(SSIDbestehend);
-    console.log(passwort);
   }
 
-  function connectToWLAN() {}
+  async function connectToWLAN() {
+    await fetch("/connect-wlan", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({}),
+    });
+  }
 
-  function activateHotspot() {}
+  async function activateHotspot() {
+    await fetch("/connect-hotspot", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({}),
+    });
+  }
 
-  function connectToNewWLAN() {}
+  async function connectToNewWLAN() {
+    if(sessionStorage.getItem("wlanSSID") != null && sessionStorage.getItem("wlanPass") != null) {
+      const data = {
+        wlanSSID: sessionStorage.getItem("wlanSSID"),
+        wlanPass: sessionStorage.getItem("wlanPass")
+      };
 
-  function changeHotspot() {}
+      await fetch("/change-wlan", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data),
+      });
+    }
+  }
+
+  async function changeHotspot() {
+    if(sessionStorage.getItem("hotspotSSID") != null && sessionStorage.getItem("hotspotPass") != null) {
+      const data = {
+        hotspotSSID: sessionStorage.getItem("hotspotSSID"),
+        hotspotPass: sessionStorage.getItem("hotspotPass")
+      };
+
+      await fetch("/change-hotspot", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data),
+      });
+    }
+  }
+
+  function setSessionWlanSSID() {
+    sessionStorage.setItem("wlanSSID", newWLAN);
+    console.log(window.sessionStorage.getItem("wlanSSID"));
+  }
+
+  function setSessionWlanPass() {
+    sessionStorage.setItem("wlanPass", newWLANpasswort);
+    console.log(window.sessionStorage.getItem("newWLANpasswort"));
+  }
+
+  function setSessionHotspotSSID() {
+    sessionStorage.setItem("hotspotSSID", SSIDbestehend);
+    console.log(window.sessionStorage.getItem("hotspotSSID"));
+  }
+
+  function setSessionHotspotPass() {
+    sessionStorage.setItem("hotspotPass", passwortBestehend);
+    console.log(window.sessionStorage.getItem("hotspotPass"));
+  }
+
 </script>
 
 <div class="switchContainer">
@@ -38,17 +110,15 @@
       <input
         class="eingabe"
         type="string"
-        id="wlanSSID"
-        on:input={scream}
         bind:value={newWLAN}
+        on:input={setSessionWlanSSID}
       />
       <p>Passwort</p>
       <input
         class="eingabe"
         type="string"
-        id="wlanPasswort"
-        on:input={scream}
         bind:value={newWLANpasswort}
+        on:input={setSessionWlanPass}
       />
       <button class="btnSubmit" on:click={connectToNewWLAN()}>Verbinden</button>
 
@@ -60,8 +130,8 @@
         class="eingabe"
         type="string"
         id="wlanSSID"
-        on:input={scream}
         bind:value={SSIDbestehend}
+        on:input={setSessionHotspotSSID}
       />
       <p>Passwort</p>
       <!--        <input class="eingabe" type="string" id="wlanPasswort" disabled={!yes} on:input={scream} bind:value={passwort}>-->
@@ -69,8 +139,8 @@
         class="eingabe"
         type="string"
         id="wlanPasswort"
-        on:input={scream}
         bind:value={passwortBestehend}
+        on:input={setSessionHotspotPass}
       />
       <button class="btnSubmit" on:click={changeHotspot}>Ändern</button>
     </div>
