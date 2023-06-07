@@ -42,7 +42,7 @@
   }
 
   async function connectToNewWLAN() {
-    if(sessionStorage.getItem("wlanSSID") != null && sessionStorage.getItem("wlanPass") != null) {
+
       const data = {
         wlanSSID: sessionStorage.getItem("wlanSSID"),
         wlanPass: sessionStorage.getItem("wlanPass")
@@ -53,11 +53,11 @@
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data),
       });
-    }
+
   }
 
   async function changeHotspot() {
-    if(sessionStorage.getItem("hotspotSSID") != null && sessionStorage.getItem("hotspotPass") != null) {
+
       const data = {
         hotspotSSID: sessionStorage.getItem("hotspotSSID"),
         hotspotPass: sessionStorage.getItem("hotspotPass")
@@ -68,7 +68,7 @@
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data),
       });
-    }
+
   }
 
   function setSessionWlanSSID() {
