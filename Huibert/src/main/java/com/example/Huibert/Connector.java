@@ -8,10 +8,10 @@ public class Connector {
     public void hotspot_on() throws IOException {
         ProcessBuilder builder0 = new ProcessBuilder();
         //ProcessBuilder builder0 = new ProcessBuilder("sh", "-c", "/usr/bin/sudo /usr/bin/bash /usr/bin/autohotspot/autohotspot.sh service");
-        builder0.command("sudo", "bash", "/usr/bin/autohotspot/autohotspot.sh", "on");
+        builder0.command("/usr/bin/sudo", "/usr/bin/bash", "/usr/bin/autohotspot/autohotspot.sh", "on");
 
         Process process = builder0.start();
-        process.destroy();
+
 
     }
 
@@ -34,7 +34,8 @@ public class Connector {
         ProcessBuilder builder1 = new ProcessBuilder();
         builder1.command("sudo", "bash", "/home/pi/changeSsidPwHotspot.bash", name, password);
         Process process = builder1.start();
-        process.destroy();
+
+        System.out.println("Hotspot changed success");
 
     }
 
@@ -43,7 +44,7 @@ public class Connector {
         ProcessBuilder builder1 = new ProcessBuilder();
         builder1.command("sudo", "bash", "/home/pi/changeSsidPwWifi.bash", name, password);
         Process process = builder1.start();
-        process.destroy();
+
 
     }
 
