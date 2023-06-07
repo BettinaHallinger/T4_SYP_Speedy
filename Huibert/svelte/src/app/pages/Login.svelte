@@ -1,7 +1,9 @@
 <script>
+    import sjcl from 'sjcl'
 
     let email = "";
     let password = "";
+    let passwordHash = "";
     let hasBeenClicked = false;
 
     /**
@@ -12,17 +14,58 @@
         var emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;  
         return emailRegEx.test(String(email).toLowerCase());
     }
-    
-    
-    function handleSubmission() {
-        hasBeenClicked = true;
-        if (isValidEmail && isValidPassword) {
-            // Send data somewhere
-            alert("submitted");
+
+
+    function setSessionUser() {
+        sessionStorage.setItem("userName", email);
+        console.log(window.sessionStorage.getItem("userName"));
+
+        sessionStorage.setItem("userPass", passwordHash);
+        console.log(window.sessionStorage.getItem("userPass"));
+    }
+
+    async function submitUser() {
+        const data = {
+            userName: sessionStorage.getItem("userName"),
+            userPass: sessionStorage.getItem("userPass")
+        };
+
+        const response = await fetch("/submit-user", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            const result = await response.text();
+            // Handle the returned message from Java
+            console.log(result);
+        } else {
+            // Handle the error case
+            console.error('Error occurred during request');
         }
     }
 
-    $: isValidEmail = validateEmail(email);   
+    function hashPassword() {
+
+        const userPass = password;
+        const myBitArray = sjcl.hash.sha256.hash(userPass);
+        const passHash = sjcl.codec.hex.fromBits(myBitArray);
+        console.log(passHash);
+        passwordHash = passHash;
+    }
+
+    function handleSubmission() {
+    hasBeenClicked = true;
+        if (email !== "" && isValidPassword) {
+            // Send data somewhere
+            hashPassword();
+            setSessionUser();
+            alert("submitted");
+            submitUser();
+        }
+    }
+
     $: isValidPassword = password.length >= 4;
     
 </script>
@@ -34,12 +77,8 @@
         <h1>Login</h1>
         <div class="input-wrapper">
             <input class="eingabe" type="email" bind:value={email} placeholder="Email"/>
-            {#if hasBeenClicked && !isValidEmail}
-                <p class="validation-error">Invalid email</p>
-            {/if}
-                {#if isValidEmail}
-            <p class="validation">Valid email</p>
-            {/if}
+<!--            <p class="validation-error">Invalid email</p>-->
+<!--            <p class="validation">Valid email</p>-->
         </div>
         
         <div class="input-wrapper">

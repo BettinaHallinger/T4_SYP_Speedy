@@ -5,7 +5,10 @@
   let newWLANpasswort = "";
   let newWLAN = "";
   let passwortBestehend = "";
-
+  
+  if(sessionStorage.getItem("hotspotSSID") == null) {
+    setSessionHotspotSSID();
+  }
   if(sessionStorage.getItem("wlanSSID") != null) {
     newWLAN = sessionStorage.getItem("wlanSSID");
   }
@@ -42,34 +45,31 @@
   }
 
   async function connectToNewWLAN() {
-    if(sessionStorage.getItem("wlanSSID") != null && sessionStorage.getItem("wlanPass") != null) {
-      const data = {
-        wlanSSID: sessionStorage.getItem("wlanSSID"),
-        wlanPass: sessionStorage.getItem("wlanPass")
-      };
+    const data = {
+      wlanSSID: sessionStorage.getItem("wlanSSID"),
+      wlanPass: sessionStorage.getItem("wlanPass")
+    };
 
-      await fetch("/change-wlan", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data),
-      });
-    }
+    await fetch("/change-wlan", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data),
+    });
   }
 
   async function changeHotspot() {
-    if(sessionStorage.getItem("hotspotSSID") != null && sessionStorage.getItem("hotspotPass") != null) {
-      const data = {
-        hotspotSSID: sessionStorage.getItem("hotspotSSID"),
-        hotspotPass: sessionStorage.getItem("hotspotPass")
-      };
+    const data = {
+      hotspotSSID: sessionStorage.getItem("hotspotSSID"),
+      hotspotPass: sessionStorage.getItem("hotspotPass")
+    };
 
-      await fetch("/change-hotspot", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data),
-      });
-    }
+    await fetch("/change-hotspot", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data),
+    });
   }
+
 
   function setSessionWlanSSID() {
     sessionStorage.setItem("wlanSSID", newWLAN);
