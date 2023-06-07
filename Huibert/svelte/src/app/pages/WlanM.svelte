@@ -10,13 +10,13 @@
     newWLAN = sessionStorage.getItem("wlanSSID");
   }
   if(sessionStorage.getItem("wlanPass") != null) {
-    newWLAN = sessionStorage.getItem("wlanPass");
+    newWLANpasswort = sessionStorage.getItem("wlanPass");
   }
   if(sessionStorage.getItem("hotspotSSID") != null) {
-    newWLAN = sessionStorage.getItem("hotspotSSID");
+    SSIDbestehend = sessionStorage.getItem("hotspotSSID");
   }
   if(sessionStorage.getItem("hotspotPass") != null) {
-    newWLAN = sessionStorage.getItem("hotspotPass");
+    passwortBestehend = sessionStorage.getItem("hotspotPass");
   }
 
 
@@ -120,7 +120,7 @@
         bind:value={newWLANpasswort}
         on:input={setSessionWlanPass}
       />
-      <button class="btnSubmit" on:click={connectToNewWLAN()}>Verbinden</button>
+      <button class="btnSubmit" on:click={connectToNewWLAN}>Verbinden</button>
 
       <h1>Eigenen Hotspot ändern</h1>
       <!--        <button class="btnSubmit" disabled={!yes} on:click={connectToWLAN()}>Verbinden</button>-->
