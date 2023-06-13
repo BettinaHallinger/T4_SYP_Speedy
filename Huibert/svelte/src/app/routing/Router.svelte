@@ -1,4 +1,5 @@
 <script  context="module">
+
     import Home from '../pages/Home.svelte';
     import MotorG from '../pages/MotorG.svelte';
     import LED from '../pages/LED.svelte';
@@ -6,6 +7,7 @@
     import UmschG from '../pages/UmschG.svelte';
     import WlanM from '../pages/WlanM.svelte';
     import Login from '../pages/Login.svelte';
+
 
     export let value = Home;
     //Nach dem klicken auf den Button Motorgeschwindigkeit, öffnet sich die Seite der Motorgeschwindigkeit
