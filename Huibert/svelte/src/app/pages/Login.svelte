@@ -1,9 +1,11 @@
 <script>
     import { Routerer, Link, Route } from "svelte-navigator";
     export let loginRoute;
+    import sjcl from 'sjcl'
 
     let username = "";
     let password = "";
+    let passwordHash = "";
     let hasBeenClicked = false;
 
     /**
@@ -17,17 +19,58 @@
          return username;
       }
     }
-    
-    
-    function handleSubmission() {
-        hasBeenClicked = true;
-        if (isValidUsername && isValidPassword) {
-            // Send data somewhere
-            alert("submitted");
+
+
+    function setSessionUser() {
+        sessionStorage.setItem("userName", email);
+        console.log(window.sessionStorage.getItem("userName"));
+
+        sessionStorage.setItem("userPass", passwordHash);
+        console.log(window.sessionStorage.getItem("userPass"));
+    }
+
+    async function submitUser() {
+        const data = {
+            userName: sessionStorage.getItem("userName"),
+            userPass: sessionStorage.getItem("userPass")
+        };
+
+        const response = await fetch("/submit-user", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            const result = await response.text();
+            // Handle the returned message from Java
+            console.log(result);
+        } else {
+            // Handle the error case
+            console.error('Error occurred during request');
         }
     }
 
-    $: isValidUsername = validateUsername(username);
+    function hashPassword() {
+
+        const userPass = password;
+        const myBitArray = sjcl.hash.sha256.hash(userPass);
+        const passHash = sjcl.codec.hex.fromBits(myBitArray);
+        console.log(passHash);
+        passwordHash = passHash;
+    }
+
+    function handleSubmission() {
+    hasBeenClicked = true;
+        if (email !== "" && isValidPassword) {
+            // Send data somewhere
+            hashPassword();
+            setSessionUser();
+            alert("submitted");
+            submitUser();
+        }
+    }
+
     $: isValidPassword = password.length >= 4;
     
 </script>

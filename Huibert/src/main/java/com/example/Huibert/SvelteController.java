@@ -100,4 +100,21 @@ public class SvelteController {
             Exception.printStackTrace();
         }
     }
+
+    @PostMapping("/submit-user")
+    public void submitUser(@RequestBody Map<String, String> data) {
+        try {
+            String userName = data.get("userName");
+            String userPass = data.get("userPass");
+
+            System.out.println("In JAVA (USER SUBMIT): " + userName);
+            System.out.println("In JAVA (USER SUBMIT): " + userPass);
+
+            exec.checkUser(userName, userPass);
+
+            System.out.println("In JAVA (USER SUBMIT): Success");
+        } catch (Exception Exception ){
+            Exception.printStackTrace();
+        }
+    }
 }

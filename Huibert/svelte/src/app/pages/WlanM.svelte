@@ -5,18 +5,21 @@
   let newWLANpasswort = "";
   let newWLAN = "";
   let passwortBestehend = "";
-
+  
+  if(sessionStorage.getItem("hotspotSSID") == null) {
+    setSessionHotspotSSID();
+  }
   if(sessionStorage.getItem("wlanSSID") != null) {
     newWLAN = sessionStorage.getItem("wlanSSID");
   }
   if(sessionStorage.getItem("wlanPass") != null) {
-    newWLAN = sessionStorage.getItem("wlanPass");
+    newWLANpasswort = sessionStorage.getItem("wlanPass");
   }
   if(sessionStorage.getItem("hotspotSSID") != null) {
-    newWLAN = sessionStorage.getItem("hotspotSSID");
+    SSIDbestehend = sessionStorage.getItem("hotspotSSID");
   }
   if(sessionStorage.getItem("hotspotPass") != null) {
-    newWLAN = sessionStorage.getItem("hotspotPass");
+    passwortBestehend = sessionStorage.getItem("hotspotPass");
   }
 
 
@@ -42,34 +45,31 @@
   }
 
   async function connectToNewWLAN() {
-    if(sessionStorage.getItem("wlanSSID") != null && sessionStorage.getItem("wlanPass") != null) {
-      const data = {
-        wlanSSID: sessionStorage.getItem("wlanSSID"),
-        wlanPass: sessionStorage.getItem("wlanPass")
-      };
+    const data = {
+      wlanSSID: sessionStorage.getItem("wlanSSID"),
+      wlanPass: sessionStorage.getItem("wlanPass")
+    };
 
-      await fetch("/change-wlan", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data),
-      });
-    }
+    await fetch("/change-wlan", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data),
+    });
   }
 
   async function changeHotspot() {
-    if(sessionStorage.getItem("hotspotSSID") != null && sessionStorage.getItem("hotspotPass") != null) {
-      const data = {
-        hotspotSSID: sessionStorage.getItem("hotspotSSID"),
-        hotspotPass: sessionStorage.getItem("hotspotPass")
-      };
+    const data = {
+      hotspotSSID: sessionStorage.getItem("hotspotSSID"),
+      hotspotPass: sessionStorage.getItem("hotspotPass")
+    };
 
-      await fetch("/change-hotspot", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data),
-      });
-    }
+    await fetch("/change-hotspot", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data),
+    });
   }
+
 
   function setSessionWlanSSID() {
     sessionStorage.setItem("wlanSSID", newWLAN);
@@ -120,7 +120,7 @@
         bind:value={newWLANpasswort}
         on:input={setSessionWlanPass}
       />
-      <button class="btnSubmit" on:click={connectToNewWLAN()}>Verbinden</button>
+      <button class="btnSubmit" on:click={connectToNewWLAN}>Verbinden</button>
 
       <h1>Eigenen Hotspot ändern</h1>
       <!--        <button class="btnSubmit" disabled={!yes} on:click={connectToWLAN()}>Verbinden</button>-->
