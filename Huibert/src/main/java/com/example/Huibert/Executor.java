@@ -6,6 +6,7 @@ import net.minidev.json.parser.ParseException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Executor {
@@ -133,6 +134,45 @@ public class Executor {
 
     }
 
+    public String checkUser(String userName, String userPass) throws IOException {
+        ProcessBuilder builder = new ProcessBuilder();
+        builder.command("python3", "./compareUser.py", userName, userPass);
 
+        Process process = builder.start();
 
+        // Read the output from the Python process
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        StringBuilder output = new StringBuilder();
+
+        while ((line = reader.readLine()) != null) {
+            output.append(line);
+        }
+
+        // Read the error output from the Python process
+        BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+        StringBuilder errorOutput = new StringBuilder();
+        while ((line = errorReader.readLine()) != null) {
+            errorOutput.append(line);
+        }
+
+        try {
+            // Wait for the Python process to finish and get the exit code
+            int exitCode = process.waitFor();
+            System.out.println(exitCode);
+
+            if (exitCode == 0) {
+                // Python process completed successfully
+                String pythonOutput = output.toString();
+                // Handle the output as needed
+                return pythonOutput.trim();
+            } else {
+                System.err.println("Error executing Python script:");
+                System.err.println(errorOutput);
+                return "Error occurred";
+            }
+        } catch (InterruptedException e) {
+            return "Error occurred";
+        }
+    }
 }

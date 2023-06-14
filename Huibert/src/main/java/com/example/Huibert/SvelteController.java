@@ -9,6 +9,8 @@ import java.util.Map;
 @RestController
 public class SvelteController {
     private Executor exec = new Executor();
+    private Connector conn = new Connector();
+
     @PostMapping("/execute-java")
     public void executeJava(@RequestBody Map<String, String> data) {
         try {
@@ -17,10 +19,10 @@ public class SvelteController {
             int displayVel = Integer.parseInt(data.get("displayVel"));
             int led = Integer.parseInt(data.get("led"));
 
-            System.out.println(motor);
-            System.out.println(displayText);
-            System.out.println(displayVel);
-            System.out.println(led);
+            System.out.println("In JAVA (SUBMIT): " + motor);
+            System.out.println("In JAVA (SUBMIT): " + displayText);
+            System.out.println("In JAVA (SUBMIT): " + displayVel);
+            System.out.println("In JAVA (SUBMIT): " + led);
 
             // Call your Java code with the values
             //String result = MyJavaClass.execute(value1, value2, value3);
@@ -38,6 +40,79 @@ public class SvelteController {
             //exec.stopEverything();
 
             System.out.println("Success");
+        } catch (Exception Exception ){
+            Exception.printStackTrace();
+        }
+    }
+
+    @PostMapping("/change-wlan")
+    public void connectToNewWLAN(@RequestBody Map<String, String> data) {
+        try {
+            String wlanSSID = data.get("wlanSSID");
+            String wlanPass = data.get("wlanPass");
+
+            System.out.println("In JAVA (WLAN): " + wlanSSID);
+            System.out.println("In JAVA (WLAN): " + wlanPass);
+
+            conn.wifi_change(wlanSSID, wlanPass);
+
+            System.out.println("Success");
+        } catch (Exception Exception ){
+            Exception.printStackTrace();
+        }
+    }
+
+    @PostMapping("/change-hotspot")
+    public void changeHotspot(@RequestBody Map<String, String> data) {
+        try {
+            String hotspotSSID = data.get("hotspotSSID");
+            String hotspotPass = data.get("hotspotPass");
+
+            System.out.println("In JAVA (HOTSPOT): " + hotspotSSID);
+            System.out.println("In JAVA (HOTSPOT): " + hotspotPass);
+
+            conn.hotspot_change(hotspotSSID, hotspotPass);
+
+            System.out.println("Success");
+        } catch (Exception Exception ){
+            Exception.printStackTrace();
+        }
+    }
+
+    @PostMapping("/connect-wlan")
+    public void connectToWLAN(@RequestBody Map<String, String> data) {
+        try {
+            conn.hotspot_off();
+
+            System.out.println("In JAVA (WLAN EXISTING): Success");
+        } catch (Exception Exception ){
+            Exception.printStackTrace();
+        }
+    }
+
+    @PostMapping("/connect-hotspot")
+    public void activateHotspot(@RequestBody Map<String, String> data) {
+        try {
+            conn.hotspot_on();
+
+            System.out.println("In JAVA (HOTSPOT EXISTING): Success");
+        } catch (Exception Exception ){
+            Exception.printStackTrace();
+        }
+    }
+
+    @PostMapping("/submit-user")
+    public void submitUser(@RequestBody Map<String, String> data) {
+        try {
+            String userName = data.get("userName");
+            String userPass = data.get("userPass");
+
+            System.out.println("In JAVA (USER SUBMIT): " + userName);
+            System.out.println("In JAVA (USER SUBMIT): " + userPass);
+
+            exec.checkUser(userName, userPass);
+
+            System.out.println("In JAVA (USER SUBMIT): Success");
         } catch (Exception Exception ){
             Exception.printStackTrace();
         }
