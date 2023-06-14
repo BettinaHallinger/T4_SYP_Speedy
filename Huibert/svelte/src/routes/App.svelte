@@ -1,5 +1,4 @@
 <script>
-  import { Router, Link, Route } from "svelte-navigator";
   import {
     onclickMG,
     onclickLED,
@@ -8,8 +7,7 @@
     onclickWlanM,
     onclickLOG,
   } from "../app/routing/Router.svelte";
-  import Routerer from "../app/routing/Router.svelte";
-  import Login from "../app/pages/Login.svelte";
+  import Router from "../app/routing/Router.svelte";
 
   let routeChange = "Home";
 
@@ -37,41 +35,55 @@
       let motor = sessionStorage.getItem("motor");
     }
   }
-
 </script>
 
 <div class="containerAll">
-  <Router>
-    <Route path="/index.html" component={Login}/>
-    <Route path="/settings">
-      <div class="header">
-        <div class="blue"/>
-        <div class="gray">
-          <img src="HTL-Logo.png" />
-          <!--<button class="btn" on:click={onclickLOG} on:click={() => (routeChange = "LOG")}>Login</button>-->
-        </div>
-      </div>
-      <!-- TODO: Take the 'routeChange' variable from +page.svelte and use it in a switch-case (in 'Router.svelte') to not use a function for every single button -->
+  <div class="header">
+    <div class="blue" />
+    <div class="gray">
+      <img src="HTL-Logo.png" />
+      <button
+        class="btn"
+        on:click={onclickLOG}
+        on:click={() => (routeChange = "LOG")}>Login</button
+      >
+    </div>
+  </div>
+  <!-- TODO: Take the 'routeChange' variable from +page.svelte and use it in a switch-case (in 'Router.svelte') to not use a function for every single button -->
 
-      <div class="containerBoth">
-        <div class="container">
-          <!--<ul2 class="conButton">-->
-          <button class="btn" on:click={onclickMG} on:click={() => (routeChange = "MG")}>Motorgeschwindigkeit</button>
-          <button class="btn" on:click={onclickLED} on:click={() => (routeChange = "LED")}>LED</button>
-          <button class="btn" on:click={onclickDisText} on:click={() => (routeChange = "DT")}>Displaytext</button>
-          <button class="btn" on:click={() => (routeChange = "WM")}>WLAN-Modus</button>
-          <button class="btnSubmit" on:click={executeJava}>Submit</button>
-          <!-- </ul2> -->
-        </div>
-        <!-- <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p> -->
-        <div class="container2">
-          {#key routeChange}
-            <Routerer />
-          {/key}
-        </div>
-      </div>
-    </Route>
-  </Router>
+  <div class="containerBoth">
+    <div class="container">
+      <!--<ul2 class="conButton">-->
+      <button
+        class="btn"
+        on:click={onclickMG}
+        on:click={() => (routeChange = "MG")}>Motorgeschwindigkeit</button
+      >
+      <button
+        class="btn"
+        on:click={onclickLED}
+        on:click={() => (routeChange = "LED")}>LED</button
+      >
+      <button
+        class="btn"
+        on:click={onclickDisText}
+        on:click={() => (routeChange = "DT")}>Displaytext</button
+      >
+      <button
+        class="btn"
+        on:click={onclickWlanM}
+        on:click={() => (routeChange = "WM")}>WLAN-Modus</button
+      >
+      <button class="btnSubmit" on:click={executeJava}>Submit</button>
+      <!-- </ul2> -->
+    </div>
+    <!-- <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p> -->
+    <div class="container2">
+      {#key routeChange}
+        <Router />
+      {/key}
+    </div>
+  </div>
 </div>
 
 <!--
@@ -221,7 +233,6 @@
     height: 100%;
     padding-top: 3em;
   }
-
 
   @media (max-width: 780px) {
     ul {
