@@ -19,3 +19,10 @@
     2. Hotspot Passwort: Drehteller2023Speedy
     3. IP: 192.168.0.1 in Speedy-Wlan
 
+## Svelte Änderungen:
+Wenn der Inhalt der Svelte Dateien ändert:
+    1. "svelte" Ordner in einem Terminal öffnen
+    2. Befehl "npm run build" ausführen
+    3. Server starten
+    4. Webseite aufrufen
+
